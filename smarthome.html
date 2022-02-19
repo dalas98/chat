@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Smart Home Hans</title>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="f fe">
+            <div class="icon icon-w"></div>
+            <div class="heading">
+                <h5 class="date">1 Feb 2019</h5>
+                <h2 class="title">Cloudy</h2>
+            </div>
+            </div>
+            
+            <div class="weather f">
+            <div>
+                <strong>26°<sup>C</sup></strong>
+                <p>Indoor Temp.</p>
+            </div>
+            <div>
+                <strong>48.2%</strong>
+                <p>Outdoor Humidity</p>
+            </div>
+            <div>
+                <strong>52.99</strong>
+                <p>Indoor Temp.</p>
+            </div>
+            </div>
+        </header>
+        <section>
+        <!-- Category -->
+            <div class="category">
+            <ul>
+                <li><a href="#!" class="active">Living Room</a></li>
+                <li><a href="#!">Kitchen</a></li>
+                <li><a href="#!">Dinning</a></li>
+                <li><a href="#!">Weather</a></li>
+            </ul>
+            </div>
+        <!-- Appliances -->
+            <div class="appliances">
+            
+            <div class="appliance">
+                <input type="checkbox" name="a" id="a">
+                <label for="a">
+                <i class="l"></i>
+                <strong>Lampu Luar</strong>
+                <span data-o="opened" data-c="closed"></span>
+                <small></small>
+                </label>
+            </div>
+            
+            <div class="appliance">
+                <input type="checkbox" name="a" id="b">
+                <label for="b">
+                <i class="r"></i>
+                <strong>Lampu Depan</strong>
+                <span data-o="opened" data-c="closed"></span>
+                <small></small>
+                </label>
+            </div>
+            
+            <div class="appliance">
+                <input type="checkbox" name="a" id="c">
+                <label for="c">
+                <i class="a"></i>
+                <strong>Lampu Kamar</strong>
+                <span data-o="opened" data-c="closed"></span>
+                <small></small>
+                </label>
+            </div>
+            
+            <div class="appliance">
+                <input type="checkbox" name="a" id="d">
+                <label for="d">
+                <i class="f"></i>
+                <strong>Lampu Dapur</strong>
+                <span data-o="opened" data-c="closed"></span>
+                <small></small>
+                </label>
+            </div>
+            
+            <div class="m-player">
+                <h2>Shared Devices</h2>
+                <div class="player">
+                <div class="disc"></div>
+                <div class="artist">
+                    <p>Rosetta Stoned</p>
+                    <small>Tool</small>
+                </div>
+                <div class="controls">
+                    <input type="checkbox" name="a" id="p">
+                    <label for="p">
+                    <div class="control"></div>
+                    </label>
+                </div>
+                </div>
+            </div>
+            
+            </div>
+        </section>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://socket-hans.herokuapp.com/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io("wss://socket-hans.herokuapp.com");
+    socket.on("chat", function(msg) {
+        console.log("message get", msg)
+      });
+    var params = null
+
+    $("#a").click(function(){
+        if($(this).is(":checked")){
+            params = { port: 0, state: true }
+        }else{
+            params = { port: 0, state: false }
+        }
+        socket.emit("relay", params);
+    });
+
+    $("#b").click(function(){
+        if($(this).is(":checked")){
+            params = { port: 4, state: true }
+        }else{
+            params = { port: 4, state: false }
+        }
+        socket.emit("relay", params);
+    });
+
+    $("#c").click(function(){
+        if($(this).is(":checked")){
+            params = { port: 16, state: true }
+        }else{
+            params = { port: 16, state: false }
+        }
+        socket.emit("relay", params);
+    });
+
+    $("#d").click(function(){
+        if($(this).is(":checked")){
+            params = { port: 5, state: true }
+        }else{
+            params = { port: 5, state: false }
+        }
+        socket.emit("relay", params);
+    });
+</script>
+</html>
