@@ -20,12 +20,12 @@
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
-    <!-- <script src="https://socket-hans.herokuapp.com/socket.io/socket.io.js"></script> -->
-    <script src="http://192.168.0.106:6969/socket.io/socket.io.js"></script>
+    <script src="https://socket-hans.herokuapp.com/socket.io/socket.io.js"></script>
+    <-- <script src="http://192.168.0.106:6969/socket.io/socket.io.js"></script> -->
 
     <script>
-      // var socket = io("ws://socket-hans.herokuapp.com");
-      var socket = io("ws://192.168.0.106:6969");
+      var socket = io("ws://socket-hans.herokuapp.com");
+      // var socket = io("ws://192.168.0.106:6969");
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
