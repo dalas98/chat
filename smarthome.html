@@ -146,6 +146,10 @@
                     socket.emit("relay", params);
                 });
             }
+            socket.on("relay", (event) => {
+                console.log("evenet", event)
+                $("#"+event.id).prop("checked", event.state)
+            })
         }
     })
 
